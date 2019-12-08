@@ -37,7 +37,15 @@ handleClick (event) {
     .then(response =>{
     this.setState({change: response.data});
     console.log(this.state.change.dollars);
-  });
+  }).catch(error => {
+    console.log(
+    "Error caught while calling an external service: " +
+    JSON.stringify(error.response.message)
+  )
+  if (error.response.status === 500){
+    alert("Please enter a value greater tthan 0 dollars");
+  }
+  })
   }
 
   render () {
@@ -54,7 +62,7 @@ handleClick (event) {
 
           <p>Your Optimal Change in coins iabelow</p>
           <p>You will recieve {this.state.change.dollars} dollar coins</p>
-          <p>You will recieve {this.state.change.halfDollars} hald dollars coins</p>
+          <p>You will recieve {this.state.change.halfDollars} half dollar coins</p>
           <p>You will recieve {this.state.change.quarters} quarters</p>
           <p>You will recieve {this.state.change.dimes} dimes</p>
           <p>You will recieve {this.state.change.nickels} nickels</p>
